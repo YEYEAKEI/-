@@ -1,26 +1,58 @@
-import java.util.HashMap;
-import java.util.Scanner;
+package CSP;
 
-public class Main {
 
-    public static void main(String[] args) {
-    	HashMap<Integer,Integer> mao = new HashMap<Integer,Integer>();
-        int n = 6;
-        int m = 2;
-        int[] array = {0,-1,4,-2,3,-2,3};
-        int res = 0;
-        int[] dp = new int[n + 1];
-        int[] maxArray = new int[n + 1];
-        for (int i = 1; i <= m; i++) {
-            res = Integer.MIN_VALUE;
-            for (int j = i; j <= n; j++) {
-                dp[j] = Math.max(dp[j - 1], maxArray[j - 1]) + array[j];
+import java.util.*;
 
-                maxArray[j-1] = res;
-                if (res < dp[j]) res = dp[j];
-            }
-        }
-
-        System.out.println(res);
-    }
+public class Main 
+{
+	public static void main(String[] args)
+	{
+		Scanner in = new Scanner(System.in);
+		while(in.hasNext())
+		{
+			int n = in.nextInt();
+			int count = 0;
+			int[] num = new int[4];
+			int j = 0;
+			for(int i=1;count<=n;i++)
+			{
+				if(seven(i))
+				{
+					j++;
+					count++;
+					if(j == 4) 
+						j = 0;
+				}
+				else
+				{
+					num[j]++;
+					j++;
+					if(j == 4)
+						j = 0;
+				}
+			}
+			
+			for(int k=0;k<4;k++)
+			{
+				System.out.println(num[k]);
+			}
+		}
+	}
+	
+	public static boolean seven (int num)
+	{
+		if(num % 7 == 0 || num % 10 == 7)  return false;
+		
+		num /= 10;
+		
+		while(num>0)
+		{
+			if(num % 10 == 7)
+				return false;
+			num /= 10;
+		}
+		return true;
+		
+	}
+	
 }
